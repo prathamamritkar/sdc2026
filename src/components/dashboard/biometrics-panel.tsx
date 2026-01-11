@@ -1,0 +1,58 @@
+"use client";
+
+import { Droplets, Sprout, Wind } from "lucide-react";
+import { DashboardPanel } from "./dashboard-panel";
+import { RadialChart } from "./radial-chart";
+import { useSimulatedNumber } from "@/lib/hooks";
+
+const crops = [
+  { name: "Potatoes", status: "Nominal" },
+  { name: "Tilapia", status: "Nominal" },
+  { name: "Algae", status: "Optimal" },
+  { name: "Spirulina", status: "Optimal" },
+];
+
+export function BiometricsPanel() {
+  const o2Saturation = useSimulatedNumber(98.2, 0.5, 2500);
+  const waterFlow = useSimulatedNumber(1200, 50, 3000);
+
+  return (
+    <DashboardPanel delay={0.4}>
+      <div className="h-full flex flex-col">
+        <h2 className="text-lg font-bold text-cyan-400 mb-4 tracking-wider">AQUA-LUNG BIOMETRICS</h2>
+        <div className="flex flex-col xl:flex-row items-center gap-4 mb-4">
+          <div className="w-full xl:w-1/2">
+            <RadialChart value={o2Saturation} label="O₂ Saturation" />
+          </div>
+          <div className="w-full xl:w-1/2 flex flex-col gap-2 text-center xl:text-left">
+            <div className="flex items-center justify-center xl:justify-start gap-2">
+              <Droplets className="w-5 h-5 text-cyan-400" />
+              <span className="font-bold text-lg">{waterFlow.toFixed(0)} L/hr</span>
+            </div>
+            <p className="text-xs text-foreground/70">WATER RECYCLED</p>
+            <div className="flex items-center justify-center xl:justify-start gap-2 mt-2">
+              <Wind className="w-5 h-5 text-cyan-400" />
+              <span className="font-bold text-lg">ACTIVE</span>
+            </div>
+            <p className="text-xs text-foreground/70">ATMOSPHERE SCRUBBERS</p>
+          </div>
+        </div>
+        
+        <h3 className="text-md font-bold text-cyan-400/80 mt-4 mb-2 flex items-center gap-2"><Sprout className="w-5 h-5" /> BIOMASS YIELD</h3>
+        <div className="flex-grow rounded-md p-2 bg-black/20">
+          <ul className="space-y-2">
+            {crops.map((crop) => (
+              <li key={crop.name} className="flex justify-between items-center text-sm">
+                <span>{crop.name}</span>
+                <div className="flex items-center gap-2">
+                  <span className="text-foreground/70">{crop.status}</span>
+                  <div className="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_4px_theme(colors.green.400)]" />
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </DashboardPanel>
+  );
+}

@@ -1,0 +1,97 @@
+"use client";
+
+import { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { DashboardPanel } from "./dashboard-panel";
+import { detectTelemetryAnomalies } from "@/ai/flows/telemetry-anomaly-detection";
+import { useInterval, useSimulatedPowerData } from "@/lib/hooks";
+import { AlertTriangle, CheckCircle, Info } from "lucide-react";
+
+type LogType = "INFO" | "SUCCESS" | "WARNING" | "CRITICAL";
+
+interface LogEntry {
+  type: LogType;
+  message: string;
+  timestamp: string;
+}
+
+const logTypeStyles: { [key in LogType]: { color: string; icon: React.ReactNode } } = {
+  INFO: { color: "text-foreground/70", icon: <Info className="w-3.5 h-3.5" /> },
+  SUCCESS: { color: "text-green-400", icon: <CheckCircle className="w-3.5 h-3.5" /> },
+  WARNING: { color: "text-amber-400", icon: <AlertTriangle className="w-3.5 h-3.5" /> },
+  CRITICAL: { color: "text-red-500", icon: <AlertTriangle className="w-3.5 h-3.5" /> },
+};
+
+export function SystemLog() {
+  const [logs, setLogs] = useState<LogEntry[]>([
+    { type: "INFO", message: "Connecting to Oceanus Proxima telemetry stream...", timestamp: new Date().toLocaleTimeString() },
+    { type: "SUCCESS", message: "Bio-Firewall: SECURE", timestamp: new Date().toLocaleTimeString() },
+    { type: "SUCCESS", message: "Tele-robotics link: STABLE", timestamp: new Date().toLocaleTimeString() },
+    { type: "INFO", message: "Real-time anomaly detection armed.", timestamp: new Date().toLocaleTimeString() },
+  ]);
+  const logContainerRef = useRef<HTMLDivElement>(null);
+  const { coreA, coreB, powerOutput } = useSimulatedPowerData();
+
+  const addLog = (type: LogType, message: string) => {
+    setLogs(prev => [...prev, { type, message, timestamp: new Date().toLocaleTimeString() }]);
+  };
+
+  useInterval(async () => {
+    const telemetryData = { coreATemp: coreA.toFixed(1), coreBTemp: coreB.toFixed(1), powerOutput: powerOutput.toFixed(2) };
+    const historicalData = { avgCoreTemp: 600, avgPowerOutput: 18.4 };
+    
+    try {
+      const result = await detectTelemetryAnomalies({
+        systemName: "Twin-Core SMR",
+        telemetryData: JSON.stringify(telemetryData),
+        historicalData: JSON.stringify(historicalData),
+      });
+
+      if (result.isAnomalyDetected) {
+        addLog("WARNING", result.anomalyExplanation);
+        if (result.suggestedActions) {
+          addLog("INFO", `ACTION: ${result.suggestedActions}`);
+        }
+      } else if (Math.random() < 0.2) { // Occasionally log a success message
+         addLog("SUCCESS", "All systems nominal. Telemetry within expected parameters.");
+      }
+    } catch (error) {
+      console.error("Anomaly detection failed:", error);
+      addLog("CRITICAL", "Anomaly detection AI offline. Check connection.");
+    }
+  }, 7000);
+
+  useEffect(() => {
+    if (logContainerRef.current) {
+      logContainerRef.current.scrollTop = logContainerRef.current.scrollHeight;
+    }
+  }, [logs]);
+
+  return (
+    <DashboardPanel className="flex flex-col">
+      <h2 className="text-lg font-bold text-cyan-400 mb-2 tracking-wider">SYSTEM LOGS</h2>
+      <div ref={logContainerRef} className="flex-grow overflow-y-auto pr-2 bg-black/30 rounded-md p-2">
+        <AnimatePresence initial={false}>
+          {logs.map((log, index) => {
+            const style = logTypeStyles[log.type];
+            return (
+              <motion.div
+                key={index}
+                layout
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className={`flex items-start gap-2 text-xs mb-1 ${style.color}`}
+              >
+                <span className="flex-shrink-0 mt-0.5">{style.icon}</span>
+                <span className="text-foreground/50">{log.timestamp}</span>
+                <p className="flex-grow">{log.message}</p>
+              </motion.div>
+            );
+          })}
+        </AnimatePresence>
+      </div>
+    </DashboardPanel>
+  );
+}
