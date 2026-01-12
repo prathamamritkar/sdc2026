@@ -32,8 +32,8 @@ export default function Home() {
   const ActiveComponent = navItems.find(item => item.id === activeView)?.component ?? CommandView;
 
   return (
-    <div className={cn("min-h-screen flex flex-col md:flex-row transition-colors duration-500", crisisMode ? 'crisis-mode' : '')}>
-      <nav className="w-full md:w-16 bg-slate-900/30 backdrop-blur-sm border-b md:border-b-0 md:border-r border-cyan-500/30 flex md:flex-col items-center p-1 md:py-4 gap-2 md:gap-4">
+    <div className={cn("h-screen flex flex-col md:flex-row transition-colors duration-500", crisisMode ? 'crisis-mode' : '')}>
+      <nav className="fixed md:relative top-0 left-0 right-0 md:top-auto md:left-auto md:right-auto z-20 w-full md:w-16 bg-slate-900/50 backdrop-blur-md border-b md:border-b-0 md:border-r border-cyan-500/30 flex md:flex-col items-center p-1 md:py-4 gap-2 md:gap-4">
         <div className="w-8 h-8 rounded-full bg-cyan-400 flex items-center justify-center text-black font-bold text-lg mb-0 md:mb-4 shrink-0">
           OP
         </div>
@@ -56,7 +56,7 @@ export default function Home() {
         </div>
       </nav>
 
-      <main className="flex-1 p-2 sm:p-4 overflow-hidden">
+      <main className="flex-1 p-2 sm:p-4 overflow-auto pt-16 md:pt-4">
         <AnimatePresence mode="wait">
           <motion.div
             key={activeView}

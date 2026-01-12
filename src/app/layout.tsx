@@ -27,13 +27,11 @@ export default function RootLayout({
           <Image
             src="https://img.freepik.com/premium-vector/vector-illustration-water-surface-texture_888509-449.jpg"
             alt="Water texture background"
-            layout="fill"
+            fill
             objectFit="cover"
             className="fixed inset-0 w-full h-full -z-10 opacity-20 blur-sm"
           />
-          <div className="h-full overflow-auto">
-            {children}
-          </div>
+          {children}
           <Toaster />
           <CrisisAlertModal />
         </body>
