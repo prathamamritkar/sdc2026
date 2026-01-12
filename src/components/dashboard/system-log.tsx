@@ -41,11 +41,13 @@ export function SystemLog() {
 
   useEffect(() => {
     // This effect runs only on the client after hydration
-    const clientInitialLogs = initialLogMessages.map(log => ({
-      ...log,
-      timestamp: new Date().toLocaleTimeString(),
-    }));
-    setLogs(clientInitialLogs);
+    if (logs.length === 0) {
+      const clientInitialLogs = initialLogMessages.map(log => ({
+        ...log,
+        timestamp: new Date().toLocaleTimeString(),
+      }));
+      setLogs(clientInitialLogs);
+    }
   }, []);
 
   const addLog = (type: LogType, message: string) => {
@@ -90,7 +92,7 @@ export function SystemLog() {
 
   useEffect(() => {
     if (logContainerRef.current) {
-      logContainerRef.current.scrollTop = logContainerRef.current.scrollHeight;
+      logContainerRef.current.scrollTop = logContainerref.current.scrollHeight;
     }
   }, [logs]);
 
