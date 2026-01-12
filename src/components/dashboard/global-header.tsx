@@ -28,22 +28,23 @@ export function GlobalHeader() {
 
   return (
     <header className="w-full bg-slate-900/50 backdrop-blur-md border-b-2 border-border/30 p-2 sm:p-3 flex justify-between items-center text-sm sm:text-base">
-      <div className="flex items-center gap-4">
-        <h1 className="font-bold text-primary text-lg sm:text-xl tracking-widest">OCEANUS PROXIMA</h1>
-        <div className="hidden md:block w-px h-6 bg-border/30"></div>
-        <p className="hidden md:block text-primary/90">{missionTime}</p>
+      <div className="flex items-center gap-2 sm:gap-4">
+        <h1 className="font-bold text-primary text-base sm:text-xl tracking-widest truncate">OCEANUS PROXIMA</h1>
+        <div className="hidden lg:block w-px h-6 bg-border/30"></div>
+        <p className="hidden xl:block text-primary/90">{missionTime}</p>
       </div>
-      <div className="flex items-center gap-3 sm:gap-6 text-xs sm:text-sm">
+      <div className="flex items-center gap-3 sm:gap-4 text-[10px] xxs:text-xs sm:text-sm">
         <div className="flex items-center gap-1 sm:gap-2">
-          <p className="text-foreground/70">DEPTH:</p>
-          <p className="font-bold text-primary">5,200m</p>
+          <p className="text-foreground/70 hidden sm:block">DEPTH:</p>
+          <p className="font-bold text-primary">5.2km</p>
         </div>
         <div className="flex items-center gap-1 sm:gap-2">
-          <p className="text-foreground/70">EXT. PRESSURE:</p>
-          <p className="font-bold text-primary">{global.externalPressure.toFixed(2)} MPa</p>
+          <p className="text-foreground/70 hidden sm:block">PRESSURE:</p>
+          <p className="text-foreground/70 sm:hidden">P:</p>
+          <p className="font-bold text-primary">{global.externalPressure.toFixed(1)}MPa</p>
         </div>
-        <div className="hidden sm:flex items-center gap-2">
-          <p className="text-foreground/70">RAD SHIELDING:</p>
+        <div className="hidden md:flex items-center gap-2">
+          <p className="text-foreground/70">RADS:</p>
           <p className="font-bold text-green-400">100%</p>
         </div>
       </div>

@@ -32,26 +32,28 @@ export default function Home() {
   const ActiveComponent = navItems.find(item => item.id === activeView)?.component ?? CommandView;
 
   return (
-    <div className={cn("min-h-screen flex transition-colors duration-500", crisisMode ? 'crisis-mode' : '')}>
-      <nav className="w-16 bg-slate-900/30 backdrop-blur-sm border-r border-cyan-500/30 flex flex-col items-center py-4 gap-4">
-        <div className="w-8 h-8 rounded-full bg-cyan-400 flex items-center justify-center text-black font-bold text-lg mb-4">
+    <div className={cn("min-h-screen flex flex-col md:flex-row transition-colors duration-500", crisisMode ? 'crisis-mode' : '')}>
+      <nav className="w-full md:w-16 bg-slate-900/30 backdrop-blur-sm border-b md:border-b-0 md:border-r border-cyan-500/30 flex md:flex-col items-center p-1 md:py-4 gap-2 md:gap-4">
+        <div className="w-8 h-8 rounded-full bg-cyan-400 flex items-center justify-center text-black font-bold text-lg mb-0 md:mb-4 shrink-0">
           OP
         </div>
-        {navItems.map((item) => (
-          <button
-            key={item.id}
-            onClick={() => setActiveView(item.id)}
-            className={cn(
-              "w-12 h-12 flex flex-col items-center justify-center rounded-lg transition-all duration-200",
-              "text-foreground/70 hover:bg-cyan-400/10 hover:text-cyan-300",
-              activeView === item.id && "bg-cyan-400/20 text-cyan-300 shadow-[inset_0_0_10px_rgba(0,240,255,0.3)]"
-            )}
-            title={item.label}
-          >
-            <item.icon className="w-6 h-6" />
-            <span className="text-[8px] mt-1">{item.label.split(' ')[0]}</span>
-          </button>
-        ))}
+        <div className="flex flex-row md:flex-col gap-2 md:gap-4 overflow-x-auto md:overflow-x-visible">
+          {navItems.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => setActiveView(item.id)}
+              className={cn(
+                "w-16 h-12 md:w-12 md:h-12 flex flex-col items-center justify-center rounded-lg transition-all duration-200 shrink-0",
+                "text-foreground/70 hover:bg-cyan-400/10 hover:text-cyan-300",
+                activeView === item.id && "bg-cyan-400/20 text-cyan-300 shadow-[inset_0_0_10px_rgba(0,240,255,0.3)]"
+              )}
+              title={item.label}
+            >
+              <item.icon className="w-5 h-5 md:w-6 md:h-6" />
+              <span className="text-[8px] mt-1">{item.label.split(' ')[0]}</span>
+            </button>
+          ))}
+        </div>
       </nav>
 
       <main className="flex-1 p-2 sm:p-4 overflow-hidden">

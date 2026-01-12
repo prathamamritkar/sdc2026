@@ -1,12 +1,11 @@
-
 "use client";
 import { DashboardPanel } from "@/components/dashboard/dashboard-panel";
 import Image from "next/image";
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
+    Accordion,
+    AccordionContent,
+    AccordionItem,
+    AccordionTrigger,
 } from "@/components/ui/accordion";
 import {
     Table,
@@ -15,8 +14,9 @@ import {
     TableHead,
     TableHeader,
     TableRow,
-  } from "@/components/ui/table"
+} from "@/components/ui/table"
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { cn } from "@/lib/utils";
 
 const pressureData = [
     { depth: "Surface (0 km)", mpa: "~0 MPa", bar: "0 bar", equivalent: "Vacuum" },
@@ -28,50 +28,52 @@ const pressureData = [
 export function EngineeringView() {
   return (
     <div className="h-full flex flex-col gap-4">
-      <h1 className="text-2xl font-bold text-primary tracking-widest">
-        ENGINEERING & REPAIR PROTOCOLS
+      <h1 className="text-xl sm:text-2xl font-bold text-primary tracking-widest">
+        ENGINEERING & REPAIR
       </h1>
       <DashboardPanel className="flex-grow">
         <ScrollArea className="h-full w-full pr-4">
             <Accordion type="single" collapsible defaultValue="item-1" className="w-full">
             <AccordionItem value="item-1">
-                <AccordionTrigger className="text-lg text-primary/90">Pressure Analysis & Mobility</AccordionTrigger>
+                <AccordionTrigger className="text-md sm:text-lg text-primary/90">Pressure Analysis & Mobility</AccordionTrigger>
                 <AccordionContent className="text-foreground/80">
-                    <p className="mb-4">Based on the physical constants of Europa (Gravity (g) ~ 1.315 m/s² and Ice Density ρ ~ 930 kg/m³), here is the pressure analysis for the specified depth ranges. Drastically reducing the pressure through mobility is a key survival strategy.</p>
-                    <Table>
-                        <TableHeader>
-                            <TableRow>
-                                <TableHead>Depth</TableHead>
-                                <TableHead>Pressure (MPa)</TableHead>
-                                <TableHead>Pressure (Bar)</TableHead>
-                                <TableHead>Earth Equivalent</TableHead>
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                            {pressureData.map((row) => (
-                                <TableRow key={row.depth}>
-                                    <TableCell className="font-medium">{row.depth}</TableCell>
-                                    <TableCell>{row.mpa}</TableCell>
-                                    <TableCell>{row.bar}</TableCell>
-                                    <TableCell>{row.equivalent}</TableCell>
+                    <p className="mb-4 text-sm">Based on the physical constants of Europa (Gravity (g) ~ 1.315 m/s² and Ice Density ρ ~ 930 kg/m³), here is the pressure analysis for the specified depth ranges. Drastically reducing the pressure through mobility is a key survival strategy.</p>
+                    <div className="overflow-x-auto">
+                        <Table>
+                            <TableHeader>
+                                <TableRow>
+                                    <TableHead>Depth</TableHead>
+                                    <TableHead>Pressure (MPa)</TableHead>
+                                    <TableHead>Pressure (Bar)</TableHead>
+                                    <TableHead>Earth Equivalent</TableHead>
                                 </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
+                            </TableHeader>
+                            <TableBody>
+                                {pressureData.map((row) => (
+                                    <TableRow key={row.depth}>
+                                        <TableCell className="font-medium">{row.depth}</TableCell>
+                                        <TableCell>{row.mpa}</TableCell>
+                                        <TableCell>{row.bar}</TableCell>
+                                        <TableCell>{row.equivalent}</TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </div>
                 </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-2">
-                <AccordionTrigger className="text-lg text-primary/90">Habitat Repair Technologies (Deep Sea & Aerospace Adaptation)</AccordionTrigger>
+                <AccordionTrigger className="text-md sm:text-lg text-primary/90">Habitat Repair Technologies</AccordionTrigger>
                 <AccordionContent>
                 <Image
-                      src="https://storage.googleapis.com/maker-studio-project-images-prod/project-images/d1175c57-6101-4475-a0d0-6f0a6d0c9f13/user-images/0f11122a-3532-494b-bf42-99572b9a7f34"
+                      src="https://storage.googleapis.com/maker-studio-project-images-prod/project-images/d1175c57-6101-4475-a0d0-6f0a6d0c9f13/user-images/7dc0b06b-74c0-45e0-9a3b-2856f616e53c"
                       alt="Habitat Repair Technologies"
                       width={1200}
                       height={493}
                       className="w-full rounded-lg mb-4"
                       data-ai-hint="diagram technology"
                     />
-                    <div className="space-y-6 text-foreground/80">
+                    <div className="space-y-6 text-foreground/80 text-sm">
                         <div>
                             <h4 className="font-bold text-primary/80">1. Passive Repair: Self-Healing Cryo-Composites</h4>
                             <p>The first line of defence. The habitat walls use "smart" composite materials designed to "bleed" and scab over when cracked. Vascular Polymer Composites contain micro-channels with a healing agent (resin) and catalyst. When a crack ruptures the channels, pressure forces the resin into the crack, where it reacts and hardens, sealing the breach instantly. Recent breakthroughs in dynamic covalent bonding allow these polymers to heal even at cryogenic temperatures.</p>
@@ -92,17 +94,17 @@ export function EngineeringView() {
                 </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-3">
-                <AccordionTrigger className="text-lg text-primary/90">Crisis Response: Safety & Redundancy</AccordionTrigger>
+                <AccordionTrigger className="text-md sm:text-lg text-primary/90">Crisis Response: Safety & Redundancy</AccordionTrigger>
                 <AccordionContent>
                 <Image
-                      src="https://storage.googleapis.com/maker-studio-project-images-prod/project-images/d1175c57-6101-4475-a0d0-6f0a6d0c9f13/user-images/611a14c6-a60d-4560-a292-628f237f3747"
+                      src="https://storage.googleapis.com/maker-studio-project-images-prod/project-images/d1175c57-6101-4475-a0d0-6f0a6d0c9f13/user-images/cc85b8c1-155e-4c7b-b892-0b0b8e75e117"
                       alt="Crisis Response Systems"
                       width={1200}
                       height={734}
                       className="w-full rounded-lg mb-4"
                       data-ai-hint="blueprint systems"
                     />
-                    <div className="space-y-6 text-foreground/80">
+                    <div className="space-y-6 text-foreground/80 text-sm">
                         <div>
                             <h4 className="font-bold text-primary/80">Structural Defence Functions</h4>
                             <ul className="list-disc pl-5 space-y-2">

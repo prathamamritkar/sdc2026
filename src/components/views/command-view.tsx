@@ -7,23 +7,23 @@ import { DigitalTwinDiagram } from '../dashboard/digital-twin-diagram';
 
 export function CommandView() {
   return (
-    <div className="h-full flex flex-col gap-4">
+    <div className="h-full flex flex-col gap-2 sm:gap-4">
       <GlobalHeader />
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 flex-grow min-h-0">
-        <div className="lg:col-span-3 min-h-[50vh] lg:min-h-0">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-2 sm:gap-4 flex-grow min-h-0">
+        <div className="lg:col-span-3 min-h-[300px] sm:min-h-[400px] lg:min-h-0">
           <ThermodynamicsPanel />
         </div>
-        <div className="lg:col-span-6 min-h-[50vh] lg:min-h-0">
+        <div className="lg:col-span-6 min-h-[300px] sm:min-h-[400px] lg:min-h-0">
           <DashboardPanel delay={0.2}>
             <div className="h-full flex flex-col items-center justify-center">
-              <h2 className="text-lg font-bold text-primary mb-4 tracking-wider">HABITAT DIGITAL TWIN</h2>
-              <div className="w-full h-full flex items-center justify-center">
+              <h2 className="text-base sm:text-lg font-bold text-primary mb-2 sm:mb-4 tracking-wider">HABITAT DIGITAL TWIN</h2>
+              <div className="w-full h-full flex items-center justify-center p-4">
                 <DigitalTwinDiagram />
               </div>
             </div>
           </DashboardPanel>
         </div>
-        <div className="lg:col-span-3 min-h-[50vh] lg:min-h-0">
+        <div className="lg:col-span-3 min-h-[300px] sm:min-h-[400px] lg:min-h-0">
           <BiometricsPanel />
         </div>
       </div>

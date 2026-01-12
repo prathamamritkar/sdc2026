@@ -25,26 +25,26 @@ const CrewCard = ({ member }: { member: typeof crewData[0] }) => {
   return (
     <DashboardPanel className={cn(isRadHigh && "border-destructive/80 bg-destructive/10")}>
       <div className="flex items-center gap-3">
-        <img src={`https://i.pravatar.cc/80?u=${member.avatar}`} alt={member.name} className="w-16 h-16 rounded-full border-2 border-primary/50" />
+        <img src={`https://i.pravatar.cc/80?u=${member.avatar}`} alt={member.name} className="w-12 h-12 sm:w-16 sm:h-16 rounded-full border-2 border-primary/50" />
         <div>
-          <h3 className="font-bold text-sm text-primary">{member.name}</h3>
+          <h3 className="font-bold text-xs sm:text-sm text-primary">{member.name}</h3>
         </div>
       </div>
       <div className="mt-4 grid grid-cols-3 gap-2 text-center text-xs">
         <div>
           <HeartPulse className="w-5 h-5 mx-auto text-primary/70 mb-1" />
-          <p className="font-bold text-lg">{heartRate.toFixed(0)}</p>
-          <p className="text-foreground/60">BPM</p>
+          <p className="font-bold text-base sm:text-lg">{heartRate.toFixed(0)}</p>
+          <p className="text-foreground/60 text-[10px] sm:text-xs">BPM</p>
         </div>
         <div className={cn(isRadHigh && "text-destructive")}>
           <Radiation className="w-5 h-5 mx-auto text-primary/70 mb-1" />
-          <p className="font-bold text-lg">{radiation.toFixed(2)}</p>
-          <p className="text-foreground/60">mSv</p>
+          <p className="font-bold text-base sm:text-lg">{radiation.toFixed(2)}</p>
+          <p className="text-foreground/60 text-[10px] sm:text-xs">mSv</p>
         </div>
         <div>
           <Bone className="w-5 h-5 mx-auto text-primary/70 mb-1" />
-          <p className="font-bold text-lg">{boneDensity.toFixed(1)}%</p>
-          <p className="text-foreground/60">BDI</p>
+          <p className="font-bold text-base sm:text-lg">{boneDensity.toFixed(1)}%</p>
+          <p className="text-foreground/60 text-[10px] sm:text-xs">BDI</p>
         </div>
       </div>
     </DashboardPanel>
@@ -104,9 +104,9 @@ const Heatmap = () => {
 export function CrewBioView() {
   return (
     <div className="h-full flex flex-col gap-4">
-      <h1 className="text-2xl font-bold text-primary tracking-widest">CREW & BIOMETRICS</h1>
+      <h1 className="text-xl sm:text-2xl font-bold text-primary tracking-widest">CREW & BIOMETRICS</h1>
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-4 flex-grow min-h-0">
-        <div className="xl:col-span-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="xl:col-span-2 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4">
           {crewData.map((member) => (
             <CrewCard key={member.id} member={member} />
           ))}
@@ -114,8 +114,8 @@ export function CrewBioView() {
         <div className="min-h-[40vh] xl:min-h-0">
             <DashboardPanel>
                 <div className="h-full flex flex-col">
-                    <h2 className="text-lg font-bold text-primary mb-2">PSYCHOLOGICAL STRESS HEATMAP</h2>
-                    <p className="text-xs text-foreground/60 mb-4">Real-time analysis of audio-visual stress indicators across habitat zones.</p>
+                    <h2 className="text-md sm:text-lg font-bold text-primary mb-2">STRESS HEATMAP</h2>
+                    <p className="text-xs text-foreground/60 mb-4">Real-time audio-visual stress indicators.</p>
                     <div className="flex-grow">
                         <Heatmap />
                     </div>
