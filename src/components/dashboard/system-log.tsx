@@ -89,7 +89,7 @@ export function SystemLog() {
       console.error("Anomaly detection failed:", error);
       addLog("CRITICAL", "Anomaly detection AI offline. Check connection.");
     }
-  }, 30000);
+  }, 60000);
 
   useEffect(() => {
     if (logContainerRef.current) {
