@@ -27,7 +27,7 @@ export function CommandView() {
           <BiometricsPanel />
         </div>
       </div>
-      <div className="h-48 xl:h-56 shrink-0">
+      <div className="h-48 xl:h-56 shrink-0 min-h-[192px]">
         <SystemLog />
       </div>
     </div>

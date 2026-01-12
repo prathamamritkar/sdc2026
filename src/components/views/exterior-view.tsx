@@ -107,7 +107,7 @@ export function ExteriorView() {
             <RoverStatus name="BETA" color="amber" />
         </div>
       </div>
-      <div className="h-48 xl:h-64 shrink-0">
+      <div className="h-48 xl:h-64 shrink-0 min-h-[192px]">
         <VideoFeed />
       </div>
     </div>

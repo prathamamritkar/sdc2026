@@ -118,7 +118,7 @@ export function CrewBioView() {
                 <div className="h-full flex flex-col">
                     <h2 className="text-md sm:text-lg font-headline font-bold text-primary mb-2">STRESS HEATMAP</h2>
                     <p className="text-xs text-foreground/60 mb-4">Real-time audio-visual stress indicators.</p>
-                    <div className="flex-grow">
+                    <div className="flex-grow min-h-0">
                         <Heatmap />
                     </div>
                 </div>
