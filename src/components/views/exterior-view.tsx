@@ -1,3 +1,4 @@
+
 "use client";
 import { DashboardPanel } from "@/components/dashboard/dashboard-panel";
 import { BatteryFull, Thermometer } from "lucide-react";
@@ -73,8 +74,8 @@ const VideoFeed = () => {
     return (
         <DashboardPanel className="h-full">
             <div className="h-full flex flex-col">
-                <h3 className="font-headline font-bold text-md text-primary mb-2">ROVER ALPHA - FWD CAM</h3>
-                <div className="flex-grow bg-black/50 rounded-md static-noise flex items-center justify-center">
+                <h3 className="font-headline font-bold text-md text-primary mb-2 shrink-0">ROVER ALPHA - FWD CAM</h3>
+                <div className="flex-grow bg-black/50 rounded-md static-noise flex items-center justify-center min-h-0">
                     <div className="text-center p-4 bg-black/70 rounded-md">
                         <p className="text-lg font-bold text-red-500">NO SIGNAL</p>
                         <p className="text-xs text-red-500/70">RADIATION INTERFERENCE</p>
@@ -89,13 +90,13 @@ const VideoFeed = () => {
 export function ExteriorView() {
   return (
     <div className="h-full flex flex-col gap-4">
-      <h1 className="text-xl sm:text-2xl font-headline font-bold text-primary tracking-widest">EXTERIOR TELE-ROBOTICS</h1>
+      <h1 className="text-xl sm:text-2xl font-headline font-bold text-primary tracking-widest shrink-0">EXTERIOR TELE-ROBOTICS</h1>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 flex-grow min-h-0">
         <div className="lg:col-span-2 min-h-[50vh] lg:min-h-0">
           <DashboardPanel>
             <div className="h-full flex flex-col">
-                <h2 className="text-md sm:text-lg font-headline font-bold text-primary mb-2">SURFACE RADAR GRID</h2>
-                <div className="flex-grow">
+                <h2 className="text-md sm:text-lg font-headline font-bold text-primary mb-2 shrink-0">SURFACE RADAR GRID</h2>
+                <div className="flex-grow min-h-0">
                     <RadarGrid />
                 </div>
             </div>
@@ -106,7 +107,7 @@ export function ExteriorView() {
             <RoverStatus name="BETA" color="amber" />
         </div>
       </div>
-      <div className="h-48 xl:h-64">
+      <div className="h-48 xl:h-64 shrink-0">
         <VideoFeed />
       </div>
     </div>
